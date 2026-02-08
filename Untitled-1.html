@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Do You Love Me?</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+    :root {
+      --bg-start: #fff1f5;
+      --bg-end: #f8dbe2;
+      --ink: #2b2b38;
+      --accent: #e85a8b;
+      --accent-dark: #d24678;
+      --accent-soft: #fff6f9;
+      --button-blue: #5c7aa6;
+      --card-shadow: 0 30px 60px rgba(28, 24, 41, 0.18);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 10%, #ffffff, transparent 35%),
+        radial-gradient(circle at 80% 0%, #ffe9f0, transparent 40%),
+        linear-gradient(135deg, var(--bg-start), var(--bg-end));
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: '';
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent 70%);
+      filter: blur(2px);
+      z-index: 0;
+    }
+
+    body::before {
+      top: -120px;
+      left: -80px;
+    }
+
+    body::after {
+      bottom: -140px;
+      right: -60px;
+    }
+
+    .card {
+      background: #ffffff;
+      max-width: 600px;
+      width: 90%;
+      padding: 36px 32px 34px;
+      border-radius: 26px;
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(232, 90, 139, 0.1);
+      animation: card-float 1.2s ease both;
+      overflow: visible;
+    }
+
+    .card::after {
+      content: 'with love';
+      position: absolute;
+      top: 22px;
+      right: 26px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(232, 90, 139, 0.65);
+      font-weight: 700;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 32px;
+    }
+    p {
+      color: #4b4b5c;
+      line-height: 1.6;
+      margin: 12px 0;
+      font-size: 16px;
+    }
+    .gif {
+      width: 190px;
+      margin: 10px auto 20px;
+      display: block;
+      animation: none;
+    }
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes card-float {
+      0% {
+        transform: translateY(16px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .cta-row {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .primary-yes {
+      padding: 14px 34px;
+      font-size: 18px;
+      border-radius: 28px;
+      transition: transform 0.2s ease;
+    }
+
+    .primary-yes.grow {
+      transform: scale(1.06);
+    }
+
+    button {
+      margin-top: 0;
+      padding: 12px 26px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+      box-shadow: 0 12px 20px rgba(232, 90, 139, 0.25);
+      font-weight: 600;
+    }
+    button:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 26px rgba(232, 90, 139, 0.32);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+
+    .secondary {
+      background: var(--button-blue);
+      box-shadow: 0 10px 18px rgba(92, 122, 166, 0.25);
+    }
+    .secondary:hover {
+      background: #4c6992;
+      box-shadow: 0 14px 24px rgba(92, 122, 166, 0.3);
+    }
+
+    .hidden-message {
+      display: none;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #2d3a57;
+      background: var(--accent-soft);
+      border-radius: 16px;
+      padding: 14px 16px;
+      border: 1px dashed rgba(232, 90, 139, 0.4);
+    }
+
+    .mini-note {
+      font-size: 13px;
+      color: #8a8aa0;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 520px) {
+      .card {
+        padding: 30px 22px 28px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+      .gif {
+        width: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img id="mainGif" src="GIF by Shiny bear.gif" alt="cute gif" class="gif">
+    <h1>I'm Really Sorry</h1>
+    <div id="content">
+      <p>
+        I know you're upset, and I understand why. I didn't mean to hurt you,
+        and I truly regret what happened.
+      </p>
+      <p>
+        You matter to me a lot, and I hate knowing that I made you feel sad or angry.
+        I promise to do better.
+      </p>
+    </div>
+    <div class="cta-row" id="initialButtons">
+      <button id="yesBtn" class="primary-yes" onclick="showMessage()">Please Forgive Me</button>
+      <button id="noBtn" class="secondary">No</button>
+    </div>
+    <div class="cta-row" id="restartButton" style="display: none;">
+      <button class="primary-yes" onclick="location.reload()">Start Again</button>
+    </div>
+    <div class="hidden-message" id="message">
+      Thank you for giving me another chance. I really appreciate you 💖
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const noPhrases = [
+      'Ya blida😤',
+      'Hikke sa8rouna🥺',
+      'Manich msaybik😊',
+      'O93od inzil lisba7😝',
+      'Katkouti🥰',
+      'Sansounti❤️',
+      'Sonson'
+    ];
+    let noIndex = 0;
+    let yesScale = 1;
+
+    noBtn.addEventListener('click', () => {
+      noIndex = (noIndex + 1) % noPhrases.length;
+      noBtn.textContent = noPhrases[noIndex];
+      yesScale = Math.min(2.5, yesScale + 0.5);
+      yesBtn.style.transform = `scale(${yesScale})`;
+      
+      if (noIndex >= 6) {
+        noBtn.style.display = 'none';
+      }
+    });
+
+    function showMessage() {
+      document.getElementById('content').style.display = 'none';
+      document.getElementById('message').style.display = 'block';
+      document.getElementById('initialButtons').style.display = 'none';
+      document.getElementById('restartButton').style.display = 'flex';
+
+      document.querySelector('h1').innerText = 'I knew u will forgive me😉❤️';
+      document.getElementById('mainGif').src = 'Cat Love GIF by NGcorpvtc.gif';
+    }
+  </script>
+</body>
+</html>
